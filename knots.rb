@@ -1,25 +1,10 @@
-class Bitcoin < Formula
+class Knots < Formula
   desc "Decentralized, peer to peer payment network"
-  homepage "https://bitcoincore.org/"
-  url "https://bitcoincore.org/bin/bitcoin-core-26.0/bitcoin-26.0.tar.gz"
-  sha256 "ab1d99276e28db62d1d9f3901e85ac358d7f1ebcb942d348a9c4e46f0fcdc0a1"
+  homepage "https://bitcoinknots.org/"
+  url "https://github.com/bitcoinknots/bitcoin/releases/download/v25.1.knots20231115/bitcoin-25.1.knots20231115.tar.gz"
+  sha256 "b6251beee95cf6701c6ebc443b47fb0e99884880f2661397f964a8828add4002"
   license "MIT"
-  head "https://github.com/bitcoin/bitcoin.git", branch: "master"
-
-  livecheck do
-    url "https://bitcoincore.org/en/download/"
-    regex(/latest version.*?v?(\d+(?:\.\d+)+)/i)
-  end
-
-  bottle do
-    sha256 cellar: :any,                 arm64_sonoma:   "d0062252e0c931af07ab48ccd9163d80c729c798f7b8eb4f974025e158b8b2f5"
-    sha256 cellar: :any,                 arm64_ventura:  "05d45234ca89490c3867b0e0230c2b86ebc88a2ed5505887ec395776d5be20e9"
-    sha256 cellar: :any,                 arm64_monterey: "20edc14418354dbc01c6602a720625c7a7ec98b3dc157ddf0d4a4c5b34ceaba4"
-    sha256 cellar: :any,                 sonoma:         "87b42c2acf2b6ee314aabe41aaf603dff8c27c2aac5c933fe9118cd4ab55f621"
-    sha256 cellar: :any,                 ventura:        "adfa967969a20bb8010bccca9d39a44bd0951e68e55ae37e3b4d118b45424b84"
-    sha256 cellar: :any,                 monterey:       "448df06d285427ba72234be9dae4a240efa4024b0eb8076f38b48cca184e6a7d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:   "79ddee5896e3df6a980dc57819aea4ed567b0c1db6451e5f4a3680b7ab3da0d6"
-  end
+  head "https://github.com/bitcoinknots/bitcoin", branch: "25.x-knots"
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
