@@ -3,7 +3,7 @@ class Knots < Formula
   homepage "https://bitcoinknots.org/"
   url "https://github.com/bitcoinknots/bitcoin/releases/download/v26.1.knots20240513/bitcoin-26.1.knots20240513.tar.gz"
   version "26.1.1"
-  sha256 "3eaa5e3c39dada0a42cc5d8ae3737887a715e58f70fdee59714bda3446856889"
+  sha256 "b447938285b3ac82d3bc46b9a325ed683bbd330329050373aacce565cbb7714c"
   license "MIT"
   head "https://github.com/bitcoinknots/bitcoin", branch: "26.x-knots"
 
