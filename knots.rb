@@ -1,11 +1,11 @@
 class Knots < Formula
   desc "Decentralized, peer to peer payment network"
   homepage "https://bitcoinknots.org/"
-  url "https://github.com/bitcoinknots/bitcoin/releases/download/v26.1.knots20240513/bitcoin-26.1.knots20240513.tar.gz"
-  version "26.1.1"
-  sha256 "b447938285b3ac82d3bc46b9a325ed683bbd330329050373aacce565cbb7714c"
+  url "https://bitcoinknots.org/files/27.x/27.1.knots20240621/bitcoin-27.1.knots20240621.tar.gz"
+  version "27.1"
+  sha256 "f5c39520bbac219d2aff7b23854f89cc1855cfc8789f52dc630d670a99fced2b"
   license "MIT"
-  head "https://github.com/bitcoinknots/bitcoin", branch: "26.x-knots"
+  head "https://github.com/bitcoinknots/bitcoin", branch: "27.x-knots"
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
