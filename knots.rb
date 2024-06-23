@@ -32,16 +32,6 @@ class Knots < Formula
     cause "Requires std::filesystem support"
   end
 
-  patch do
-    url "https://github.com/bitcoin/bitcoin/commit/e1e3396b890b79d6115dd325b68f456a0deda57f.patch?full_index=1"
-    sha256 "b9bb2d6d2ae302bc1bd3956c7e7e66a25e782df5dc154b9d2b17d28b23fda1ad"
-  end
-
-  patch do
-    url "https://github.com/bitcoin/bitcoin/commit/9c144154bd755e3765a51faa42b8849316cfdeb9.patch?full_index=1"
-    sha256 "caeb3c04eda55b260272bfbdb4f512c99dbf2df06b950b51b162eaeb5a98507a"
-  end
-
   def install
     system "./autogen.sh"
     system "./configure", *std_configure_args,
