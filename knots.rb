@@ -25,7 +25,46 @@ class Knots < Formula
     cause "Requires std::filesystem support"
   end
 
+resource "bdb" do
+    url "https://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz"
+    sha256 "12edc0df75bf9abd7f82f821795bcee50f42cb2e5f76a6a281b85732798364ef"
+
+    # Fix build with recent clang
+    patch do
+      url "https://raw.githubusercontent.com/Homebrew/formula-patches/4c55b1/berkeley-db%404/clang.diff"
+      sha256 "86111b0965762f2c2611b302e4a95ac8df46ad24925bbb95a1961542a1542e40"
+    end
+    # Fix -flat_namespace being used on Big Sur and later.
+    patch do
+      url "https://raw.githubusercontent.com/Homebrew/formula-patches/03cf8088210822aa2c1ab544ed58ea04c897d9c4/libtool/configure-pre-0.4.2.418-big_sur.diff"
+      sha256 "83af02f2aa2b746bb7225872cab29a253264be49db0ecebb12f841562d9a2923"
+      directory "dist"
+    end
+  end
+
   def install
+    # https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md#berkeley-db
+    # https://github.com/bitcoin/bitcoin/blob/master/depends/packages/bdb.mk
+    resource("bdb").stage do
+      with_env(CFLAGS: ENV.cflags) do
+        # Fix compile with newer Clang
+        ENV.append "CFLAGS", "-Wno-implicit-function-declaration" if DevelopmentTools.clang_build_version >= 1200
+        # Fix linking with static libdb
+        ENV.append "CFLAGS", "-fPIC" if OS.linux?
+
+        args = ["--disable-replication", "--disable-shared", "--enable-cxx"]
+        args << "--build=aarch64-unknown-linux-gnu" if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+
+        # BerkeleyDB requires you to build everything from the build_unix subdirectory
+        cd "build_unix" do
+          system "../dist/configure", *args, *std_configure_args(prefix: buildpath/"bdb")
+          system "make", "libdb_cxx-4.8.a", "libdb-4.8.a"
+          system "make", "install_lib", "install_include"
+        end
+      end
+    end
+
+    ENV.runtime_cpu_detection
     args = %W[
       -DWITH_BDB=ON
       -DBerkeleyDB_INCLUDE_DIR:PATH=#{buildpath}/bdb/include
