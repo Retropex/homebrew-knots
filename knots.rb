@@ -1,15 +1,13 @@
 class Knots < Formula
   desc "Decentralized, peer to peer payment network"
   homepage "https://bitcoinknots.org/"
-  url "https://bitcoinknots.org/files/28.x/28.1.knots20250305/bitcoin-28.1.knots20250305.tar.gz"
+  url "https://bitcoinknots.org/files/29.x/29.1.knots20250903/bitcoin-29.1.knots20250903.tar.gz"
   version "28.1"
-  sha256 "0ca3b7fb8dd39ff05329056b2eb0a478cb739bc49f6da243f2b3e56fa94303c0"
+  sha256 "d8394994636b08e7bc528b99f932dd67639a854d7c0162fa2bf288d58036f506"
   license "MIT"
-  head "https://github.com/bitcoinknots/bitcoin", branch: "28.x-knots"
+  head "https://github.com/bitcoinknots/bitcoin", branch: "29.x-knots"
 
-  depends_on "autoconf" => :build
-  depends_on "automake" => :build
-  depends_on "libtool" => :build
+  depends_on "cmake" => :build
   depends_on "pkg-config" => :build
   # berkeley db should be kept at version 4
   # https://github.com/bitcoin/bitcoin/blob/master/doc/build-osx.md
@@ -18,14 +16,9 @@ class Knots < Formula
   depends_on "boost"
   depends_on "libevent"
   depends_on macos: :big_sur
-  depends_on "miniupnpc"
   depends_on "zeromq"
 
   uses_from_macos "sqlite"
-
-  on_linux do
-    depends_on "util-linux" => :build # for `hexdump`
-  end
 
   fails_with :gcc do
     version "7" # fails with GCC 7.x and earlier
@@ -33,11 +26,14 @@ class Knots < Formula
   end
 
   def install
-    system "./autogen.sh"
-    system "./configure", *std_configure_args,
-                          "--disable-silent-rules",
-                          "--with-boost-libdir=#{Formula["boost"].opt_lib}"
-    system "make", "install"
+    args = %W[
+      -DWITH_BDB=ON
+      -DBerkeleyDB_INCLUDE_DIR:PATH=#{buildpath}/bdb/include
+      -DWITH_ZMQ=ON
+    ]
+    system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
+    system "cmake", "--build", "build"
+    system "cmake", "--install", "build"
     pkgshare.install "share/rpcauth"
   end
 
