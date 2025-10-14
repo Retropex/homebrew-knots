@@ -1,11 +1,11 @@
 cask "knots-gui" do
     arch arm: "arm64", intel: "x86_64"
   
-    version "29.1"
-    sha256 arm:   "97cee269b2f418db2868bcdc8e2a20c2f27fbb69f3541b35acaf3ddab1e39f85",
-           intel: "52e358c2516067205756a94ee37c52a9e8c9df9c8186b523669bbc95aeb6b150"
+    version "29.2"
+    sha256 arm:   "56d3180158305d22d94f37aa0ea4abc3db51d7e69789b33959c0b2de6cc382c1",
+           intel: "540de65657b27055bee406f9506f6ecd11ba0ce416c4065fb8de8ee78c2b205c"
   
-    url "https://bitcoinknots.org/files/29.x/29.1.knots20250903/bitcoin-29.1.knots20250903-#{arch}-apple-darwin.zip"
+    url "https://bitcoinknots.org/files/29.x/29.2.knots20251010/bitcoin-29.2.knots20251010-#{arch}-apple-darwin.zip"
     name "Bitcoin Knots"
     desc "Bitcoin node"
     homepage "https://bitcoinknots.org/"
