@@ -1,9 +1,9 @@
 class Knots < Formula
   desc "Decentralized, peer to peer payment network"
   homepage "https://bitcoinknots.org/"
-  url "https://bitcoinknots.org/files/29.x/29.3.knots20260210/bitcoin-29.3.knots20260210.tar.gz"
-  version "29.3"
-  sha256 "08ef3b29b0ba5be78c1b2062a6ec08c479dd36a1f83d2e0fa9b2a4ec945d4e8a"
+  url "https://bitcoinknots.org/files/29.x/29.3.knots20260508/bitcoin-29.3.knots20260508.tar.gz"
+  version "29.3.3"
+  sha256 "8e3aebdacab32f6f6b65d90c98a188952553a12a577e0b58d13525bfd59dd630"
   license "MIT"
   head "https://github.com/bitcoinknots/bitcoin", branch: "29.x-knots"
 
@@ -69,6 +69,7 @@ resource "bdb" do
       -DWITH_BDB=ON
       -DBerkeleyDB_INCLUDE_DIR:PATH=#{buildpath}/bdb/include
       -DWITH_ZMQ=ON
+      -DRDTS_CONSENT=RUNTIME_WARN
     ]
     system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
     system "cmake", "--build", "build"
