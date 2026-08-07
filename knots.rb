@@ -1,9 +1,9 @@
 class Knots < Formula
   desc "Decentralized, peer to peer payment network"
   homepage "https://bitcoinknots.org/"
-  url "https://bitcoinknots.org/files/29.x/29.3.knots20260508/bitcoin-29.3.knots20260508.tar.gz"
-  version "29.3.3"
-  sha256 "8e3aebdacab32f6f6b65d90c98a188952553a12a577e0b58d13525bfd59dd630"
+  url "https://bitcoinknots.org/files/29.x/29.4.knots20260508/bitcoin-29.4.knots20260508.tar.gz"
+  version "29.4"
+  sha256 "36032ab380ac1337fb73dcbbd32a7bae8669cd2c82c440929083e7ae67fee1ab"
   license "MIT"
   head "https://github.com/bitcoinknots/bitcoin", branch: "29.x-knots"
 
