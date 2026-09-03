@@ -12,7 +12,7 @@ class Knots < Formula
   # berkeley db should be kept at version 4
   # https://github.com/bitcoin/bitcoin/blob/master/doc/build-osx.md
   # https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md
-  depends_on "berkeley-db@4"
+  depends_on "berkeley-db"
   depends_on "boost"
   depends_on "libevent"
   depends_on macos: :big_sur
